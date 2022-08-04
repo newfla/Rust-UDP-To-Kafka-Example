@@ -52,8 +52,10 @@ services:
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN
       - KAFKA_REQUEST_REQUIRED_ACKS=0
       - KAFKA_COMPRESSION_CODEC=lz4
-      - KAFKA_BATCH_NUM_MESSAGES=10000
-      - KAFKA_QUEUE_BUFFERING_MAX_MS=5
+      - KAFKA_BATCH_NUM_MESSAGES=10000 
+      - KAFKA_RETRIES=1
+      - KAFKA_QUEUE_BUFFERING_MAX_MS=5 #ALIAS LINGER.MS
+      - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=500000
     networks:
       - bridge_net
     depends_on:
@@ -71,7 +73,7 @@ services:
     networks:
       - bridge_net
     depends_on:
-    - server
+      - server
 
 networks:
   bridge_net:
