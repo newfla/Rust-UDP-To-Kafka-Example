@@ -1,9 +1,6 @@
-FROM ubuntu:jammy as base_builder
+FROM rust:latest as base_builder
 RUN apt update && \
-    apt install -y curl build-essential cmake zlib1g-dev &&\
-    curl https://sh.rustup.rs -sSf | bash -s -- -y
-
-ENV PATH="/root/.cargo/bin:${PATH}"
+    apt install -y curl build-essential cmake zlib1g-dev 
 
 FROM base_builder as builder
 WORKDIR /server

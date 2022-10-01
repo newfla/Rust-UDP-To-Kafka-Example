@@ -1,3 +1,3 @@
 #!/bin/bash
 
-docker exec -it kafka kafka-topics --bootstrap-server localhost:9092 --create --topic test --partitions 10
+docker exec -it kafka rpk topic create test --partitions 20 --brokers=localhost:9092

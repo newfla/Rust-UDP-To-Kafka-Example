@@ -1,42 +1,42 @@
 version: '3'
 services:
 
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.0.1
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
-    networks:
-      - bridge_net
-
   kafka:
-    image: confluentinc/cp-kafka:7.0.1
+    # NOTE: Please use the latest version here!
+    image: docker.redpanda.com/vectorized/redpanda:v22.2.4
     container_name: kafka
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    command:
+      - redpanda
+      - start
+      - --smp
+      - '1'
+      - --reserve-memory
+      - 0M
+      - --overprovisioned
+      - --node-id
+      - '0'
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:29092,OUTSIDE://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://kafka:29092,OUTSIDE://localhost:9092
+      - --pandaproxy-addr
+      - PLAINTEXT://0.0.0.0:28082,OUTSIDE://0.0.0.0:8082
+      - --advertise-pandaproxy-addr
+      - PLAINTEXT://kafka:28082,OUTSIDE://localhost:8082
     networks:
       - bridge_net
 
   # On lower-end hardware comment the consumer to save precious hw resources
-  consumer:
-    image: kafkacat_consumer
-    container_name: consumer
-    tty: true
-    environment:
-      - TOPIC=test
-    networks:
-      - bridge_net
-    depends_on:
-      - kafka
+  # consumer:
+  #   image: kafkacat_consumer
+  #   container_name: consumer
+  #   tty: true
+  #   environment:
+  #     - TOPIC=test
+  #   networks:
+  #     - bridge_net
+  #   depends_on:
+  #     - kafka
 
   server:
     image: tokioserver:latest
@@ -45,16 +45,17 @@ services:
       - SERVER_IP=0.0.0.0
       - SERVER_PORT=8888
       - BUFFER_SIZE=1450
+      - CACHE_SIZE=30000
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN
-      - KAFKA_REQUEST_REQUIRED_ACKS=0
+      - KAFKA_REQUEST_REQUIRED_ACKS=1
       - KAFKA_COMPRESSION_CODEC=lz4
       - KAFKA_BATCH_NUM_MESSAGES=10000 
       - KAFKA_RETRIES=1
-      - KAFKA_QUEUE_BUFFERING_MAX_MS=5 #ALIAS LINGER.MS
+      - KAFKA_QUEUE_BUFFERING_MAX_MS=50 #ALIAS LINGER.MS
       - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=500000
     networks:
       - bridge_net
@@ -66,10 +67,10 @@ services:
     container_name: client
     environment:
     - DEST_ADDR=server:8888
-    - CONNECTIONS=2
+    - CONNECTIONS=10
     - PAYLOAD_SIZE=1450
-    - RATE=100000
-    - WORKERS=0 #--> worker threads for the client default = #CPU core
+    - RATE=30000 #35000 4Gb mark 
+    - WORKERS=4 #--> worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net
     depends_on:

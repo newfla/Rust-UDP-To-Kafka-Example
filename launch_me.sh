@@ -48,19 +48,13 @@ function build() {
 }
 
 function run () {
-    echo -e "${CYAN}SPINNING ZOOKEEPER${NC}"
-    pushd docker_compose
-    docker compose up -d zookeeper
-    popd
-
-    sleep 15
 
     echo -e "${CYAN}SPINNING BROKER${NC}"
     pushd docker_compose
     docker compose up -d kafka
     popd
 
-    sleep 15
+    sleep 5
 
     echo -e "${CYAN}INIT BROKER${NC}"
     pushd scripts
