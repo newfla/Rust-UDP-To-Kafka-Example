@@ -54,7 +54,7 @@ function run () {
     docker compose up -d kafka
     popd
 
-    sleep 5
+    sleep 10
 
     echo -e "${CYAN}INIT BROKER${NC}"
     pushd scripts
