@@ -3,7 +3,7 @@ services:
 
   kafka:
     # NOTE: Please use the latest version here!
-    image: docker.redpanda.com/vectorized/redpanda:v22.2.4
+    image: docker.redpanda.com/vectorized/redpanda:latest
     container_name: kafka
     command:
       - redpanda
@@ -44,19 +44,21 @@ services:
     environment:
       - SERVER_IP=0.0.0.0
       - SERVER_PORT=8888
-      - BUFFER_SIZE=1450
-      - CACHE_SIZE=30000
-      - KAFKA_BROKERS=kafka:29092
-      - KAFKA_TOPIC=test
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
+      - BUFFER_SIZE=1450
+      - CACHE_SIZE=5000 #10000
+      - WORKER_THREADS=0 #worker threads for the server 0 --> #CPU core
+      - KAFKA_BROKERS=kafka:29092
+      - KAFKA_TOPIC=test
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN
       - KAFKA_REQUEST_REQUIRED_ACKS=1
-      - KAFKA_COMPRESSION_CODEC=lz4
+      - KAFKA_COMPRESSION_CODEC=lz4 #on modern CPU pls use zstd
       - KAFKA_BATCH_NUM_MESSAGES=10000 
       - KAFKA_RETRIES=1
-      - KAFKA_QUEUE_BUFFERING_MAX_MS=50 #ALIAS LINGER.MS
-      - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=500000
+      - KAFKA_QUEUE_BUFFERING_MAX_MS=100 #ALIAS LINGER.MS
+      - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=10000000 #big chunky batches + more aggresive compression
+      - KAFKA_QUEUE_BUFFERING_MAX_KBYTES=1048576
     networks:
       - bridge_net
     depends_on:
@@ -67,10 +69,10 @@ services:
     container_name: client
     environment:
     - DEST_ADDR=server:8888
-    - CONNECTIONS=10
+    - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=30000 #35000 4Gb mark 
-    - WORKERS=4 #--> worker threads for the client 0 --> #CPU core
+    - RATE=16000 #35000 4Gb mark 
+    - WORKERS=3 #worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net
     depends_on:
