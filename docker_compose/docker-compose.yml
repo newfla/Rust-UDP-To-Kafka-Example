@@ -2,8 +2,7 @@ version: '3'
 services:
 
   kafka:
-    # NOTE: Please use the latest version here!
-    image: docker.redpanda.com/vectorized/redpanda:latest
+    image: docker.redpanda.com/vectorized/redpanda:v22.2.7
     container_name: kafka
     command:
       - redpanda
@@ -47,12 +46,12 @@ services:
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
-      - CACHE_SIZE=5000 #10000
+      - CACHE_SIZE=20000 #or 10000 both work great
       - WORKER_THREADS=0 #worker threads for the server 0 --> #CPU core
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN
-      - KAFKA_REQUEST_REQUIRED_ACKS=1
+      - KAFKA_REQUEST_REQUIRED_ACKS=0
       - KAFKA_COMPRESSION_CODEC=lz4 #on modern CPU pls use zstd
       - KAFKA_BATCH_NUM_MESSAGES=10000 
       - KAFKA_RETRIES=1
@@ -71,8 +70,8 @@ services:
     - DEST_ADDR=server:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=16000 #35000 4Gb mark 
-    - WORKERS=3 #worker threads for the client 0 --> #CPU core
+    - RATE=18100 #3620000 4.2Gb mark 
+    - WORKERS=0 #worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net
     depends_on:

@@ -77,7 +77,7 @@ function run () {
 
     echo -e "${CYAN}KILLING MICROSERVICES${NC}"
     pushd docker_compose
-    docker compose down
+    docker compose down -t 2 -v
     popd
 
     echo -e "${CYAN}RUN TERMINATED!${NC}"
