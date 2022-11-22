@@ -46,7 +46,7 @@ services:
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
-      - CACHE_SIZE=20000 #or 10000 both work great
+      - CACHE_SIZE=10000
       - WORKER_THREADS=0 #worker threads for the server 0 --> #CPU core
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
