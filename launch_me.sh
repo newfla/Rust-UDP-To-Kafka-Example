@@ -54,7 +54,7 @@ function run () {
     docker compose up -d kafka
     popd
 
-    sleep 7
+    sleep 5
 
     echo -e "${CYAN}INIT BROKER${NC}"
     pushd scripts
@@ -66,7 +66,7 @@ function run () {
     docker compose up -d server
     popd
 
-    sleep 3
+    sleep 2
 
     echo -e "${CYAN}SPINNING CLIENT AND CONSUMER${NC}"
     pushd docker_compose

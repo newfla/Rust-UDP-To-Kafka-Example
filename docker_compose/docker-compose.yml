@@ -47,12 +47,12 @@ services:
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
       - CACHE_SIZE=10000
-      - WORKER_THREADS=0 #worker threads for the server 0 --> #CPU core
+      - WORKER_THREADS=4 #worker threads for the server 0 --> #CPU core
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN
-      - KAFKA_REQUEST_REQUIRED_ACKS=0
-      - KAFKA_COMPRESSION_CODEC=lz4 #on modern CPU pls use zstd
+      - KAFKA_REQUEST_REQUIRED_ACKS=1
+      - KAFKA_COMPRESSION_CODEC=zstd
       - KAFKA_BATCH_NUM_MESSAGES=10000 
       - KAFKA_RETRIES=1
       - KAFKA_QUEUE_BUFFERING_MAX_MS=100 #ALIAS LINGER.MS
@@ -70,8 +70,8 @@ services:
     - DEST_ADDR=server:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=18100 #3620000 4.2Gb mark 
-    - WORKERS=0 #worker threads for the client 0 --> #CPU core
+    - RATE=18150 #3620000 4.2Gb mark 
+    - WORKERS=4 #worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net
     depends_on:
