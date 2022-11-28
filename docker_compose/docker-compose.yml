@@ -70,7 +70,7 @@ services:
     - DEST_ADDR=server:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=18150 #3620000 4.2Gb mark 
+    - RATE=18800 #3620000 4.2Gb mark 
     - WORKERS=4 #worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net
