@@ -4,7 +4,6 @@ RUN apt update && \
 
 FROM base_builder as builder
 WORKDIR /server
-COPY server/.cargo .cargo
 COPY server/Cargo.toml .
 COPY server/src src
 COPY server/tasks tasks

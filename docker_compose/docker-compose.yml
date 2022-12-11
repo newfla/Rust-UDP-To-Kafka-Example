@@ -2,7 +2,7 @@ version: '3'
 services:
 
   kafka:
-    image: docker.redpanda.com/vectorized/redpanda:v22.2.7
+    image: docker.redpanda.com/vectorized/redpanda:v22.2.8
     container_name: kafka
     command:
       - redpanda
@@ -71,7 +71,7 @@ services:
     - DEST_ADDR=server:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=19000 #3620000 4.2Gb mark 
+    - RATE=19000 #19380 4.5Gb limit. Safer value that guarantees 0 drops after startup phase --> 19000 4.4GB
     - WORKERS=4 #worker threads for the client 0 --> #CPU core
     networks:
       - bridge_net

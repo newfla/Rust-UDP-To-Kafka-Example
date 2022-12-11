@@ -7,7 +7,6 @@ FROM base_builder as builder
 WORKDIR /client
 COPY client/Cargo.toml .
 COPY client/src src
-COPY client/.cargo .cargo
 RUN cargo build -r
 
 FROM ubuntu:jammy
