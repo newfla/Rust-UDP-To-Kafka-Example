@@ -73,6 +73,9 @@ services:
     - PAYLOAD_SIZE=1450
     - RATE=19000 #19380 4.5Gb limit. Safer value that guarantees 0 drops after startup phase --> 19000 4.4GB
     - WORKERS=4 #worker threads for the client 0 --> #CPU core
+    - SLEEP_TASK_SPAWN=100 #ms to wait between connections creation
+    #10k scenario
+    #10000 1450 36 3 2
     networks:
       - bridge_net
     depends_on:

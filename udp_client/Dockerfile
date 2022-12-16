@@ -12,4 +12,4 @@ RUN cargo build -r
 FROM ubuntu:jammy
 COPY --from=builder /client/target/release/udp_traffic_generator /client
 ENV WORKERS=2
-ENTRYPOINT ./client -d $DEST_ADDR -c $CONNECTIONS -l $PAYLOAD_SIZE -r $RATE -w $WORKERS
+ENTRYPOINT ./client -d $DEST_ADDR -c $CONNECTIONS -l $PAYLOAD_SIZE -r $RATE -w $WORKERS -s $SLEEP_TASK_SPAWN
