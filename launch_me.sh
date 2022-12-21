@@ -33,8 +33,8 @@ function build() {
     
     pushd scripts
 
-    echo -e "${CYAN}BUILDING SERVER${NC}"
-    ./build_server.sh
+    echo -e "${CYAN}BUILDING UDP TO KAFKA FORWARDER${NC}"
+    ./build_forwarder.sh
 
     echo -e "${CYAN}BUILDING CLIENT${NC}"
     ./build_client.sh
@@ -61,9 +61,9 @@ function run () {
     ./init_broker.sh
     popd
 
-    echo -e "${CYAN}SPINNING SERVER${NC}"
+    echo -e "${CYAN}SPINNING FORWARDER${NC}"
     pushd docker_compose
-    docker compose up -d server
+    docker compose up -d forwarder
     popd
 
     sleep 2

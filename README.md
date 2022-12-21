@@ -24,9 +24,9 @@ sudo sysctl -p
 ```
 
 # Useful Commands
-- docker logs -f server
+- docker logs -f forwarder
 - docker logs -f client
 - docker logs -f consumer
-- watch -n2 docker exec -it server cat /proc/net/udp
+- watch -n2 docker exec -it forwarder cat /proc/net/udp
 - watch -n2 docker exec -it client cat /proc/net/udp
 - docker stats
