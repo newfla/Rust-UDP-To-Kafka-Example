@@ -47,7 +47,7 @@ services:
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
       - CACHE_SIZE=10000
-      - WORKER_THREADS=4 #worker threads for the forwarder 0 --> #CPU core
+      - WORKER_THREADS=3 #worker threads 0 --> #CPU core
       - ORDER_STRATEGY=ORDERED_BY_ADDRESS
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
@@ -71,7 +71,7 @@ services:
     - DEST_ADDR=forwarder:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=19000 #19380 4.5Gb limit. Safer value that guarantees 0 drops after startup phase --> 19000 4.4GB
+    - RATE=19160 #19380 4.5Gb limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
     - SLEEP_TASK_SPAWN=100 #ms to wait between connections creation
     #10k scenario
