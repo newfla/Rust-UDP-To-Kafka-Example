@@ -32,6 +32,7 @@ services:
   #   tty: true
   #   environment:
   #     - TOPIC=test
+  #     - PROTO=true #should follow forwarder.environment.USE_PROTO
   #   networks:
   #     - bridge_net
   #   depends_on:
@@ -49,6 +50,7 @@ services:
       - CACHE_SIZE=10000
       - WORKER_THREADS=3 #worker threads 0 --> #CPU core
       - ORDER_STRATEGY=ORDERED_BY_ADDRESS
+      - USE_PROTO=false
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
       - KAFKA_PARTITION_STRATEGY=STICKY_ROUND_ROBIN

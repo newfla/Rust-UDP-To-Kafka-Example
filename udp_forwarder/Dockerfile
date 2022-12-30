@@ -1,6 +1,6 @@
 FROM rust:latest as base_builder
 RUN apt update && \
-    apt install -y curl build-essential cmake zlib1g-dev libzstd-dev
+    apt install -y curl build-essential cmake zlib1g-dev libzstd-dev protobuf-compiler
 
 FROM base_builder as builder
 WORKDIR /forwarder

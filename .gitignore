@@ -1,2 +1,3 @@
 **/client/
 **/forwarder/
+**/kafkacat_consumer/message.proto
