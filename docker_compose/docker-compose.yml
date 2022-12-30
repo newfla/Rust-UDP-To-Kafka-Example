@@ -57,7 +57,7 @@ services:
       - KAFKA_BATCH_NUM_MESSAGES=10000
       - KAFKA_RETRIES=1
       - KAFKA_QUEUE_BUFFERING_MAX_MS=100 #ALIAS LINGER.MS
-      - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=10000000 #big chunky batches + more aggresive compression
+      - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=10000000 #big chunky batches -> more compression
       - KAFKA_QUEUE_BUFFERING_MAX_KBYTES=1048576
     networks:
       - bridge_net
@@ -71,10 +71,10 @@ services:
     - DEST_ADDR=forwarder:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=19160 #19380 4.5Gb limit
+    - RATE=19380 #19380 4.5Gb/s limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
     - SLEEP_TASK_SPAWN=100 #ms to wait between connections creation
-    #10k scenario
+    #10k scenario 4.2Gb/s
     #10000 1450 36 3 2
     networks:
       - bridge_net
