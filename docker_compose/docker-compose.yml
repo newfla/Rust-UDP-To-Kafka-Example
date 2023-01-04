@@ -73,7 +73,7 @@ services:
     - DEST_ADDR=forwarder:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
-    - RATE=19380 #19380 4.5Gb/s limit
+    - RATE=20230 #19380 4.5Gb/s limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
     - SLEEP_TASK_SPAWN=100 #ms to wait between connections creation
     #10k scenario 4.2Gb/s
