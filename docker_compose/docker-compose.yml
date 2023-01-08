@@ -49,7 +49,6 @@ services:
       - BUFFER_SIZE=1450
       - CACHE_SIZE=10000
       - WORKER_THREADS=3 #worker threads 0 --> #CPU core
-      - ORDER_STRATEGY=ORDERED_BY_ADDRESS
       - USE_PROTO=false
       - KAFKA_BROKERS=kafka:29092
       - KAFKA_TOPIC=test
