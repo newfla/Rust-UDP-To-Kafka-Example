@@ -47,7 +47,7 @@ services:
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
-      - CACHE_SIZE=10000
+      - CACHE_SIZE=1800
       - WORKER_THREADS=3 #worker threads 0 --> #CPU core
       - USE_PROTO=false
       - KAFKA_BROKERS=kafka:29092
@@ -57,7 +57,7 @@ services:
       - KAFKA_COMPRESSION_CODEC=zstd
       - KAFKA_BATCH_NUM_MESSAGES=10000
       - KAFKA_RETRIES=1
-      - KAFKA_QUEUE_BUFFERING_MAX_MS=100 #ALIAS LINGER.MS
+      - KAFKA_QUEUE_BUFFERING_MAX_MS=10 #ALIAS LINGER.MS
       - KAFKA_QUEUE_BUFFERING_MAX_MESSAGES=10000000 #big chunky batches -> more compression
       - KAFKA_QUEUE_BUFFERING_MAX_KBYTES=1048576
     networks:
