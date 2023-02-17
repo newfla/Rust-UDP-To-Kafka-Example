@@ -49,6 +49,9 @@ function build() {
 
 function run () {
 
+    # echo -e "${CYAN}SWITCHING CPU GOVERNATOR TO PERFORMANCE${NC}"
+    # sudo cpupower frequency-set -g performance
+
     echo -e "${CYAN}SPINNING BROKER${NC}"
     pushd docker_compose
     docker compose up -d kafka
@@ -79,6 +82,9 @@ function run () {
     pushd docker_compose
     docker compose down -t 2 -v
     popd
+
+    # echo -e "${CYAN}SWITCHING CPU GOVERNATOR TO POWERSAVE${NC}"
+    # sudo cpupower frequency-set -g powersave
 
     echo -e "${CYAN}RUN TERMINATED!${NC}"
 }
