@@ -44,6 +44,9 @@ services:
     environment:
       - LISTEN_IP=0.0.0.0
       - LISTEN_PORT=8888
+      - USE_DTLS=false
+      - SERVER_KEY=/server-key.pem
+      - SERVER_CERT=/server-cert.pem
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
@@ -72,9 +75,12 @@ services:
     - DEST_ADDR=forwarder:8888
     - CONNECTIONS=20
     - PAYLOAD_SIZE=1450
+    - USE_DTLS=false
+    - CA_FILE=/ca-cert.pem
     - RATE=20230 #19380 4.5Gb/s limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
-    - SLEEP_TASK_SPAWN=100 #ms to wait between connections creation
+    - SLEEP_TASK_SPAWN=200 #ms to wait between connections creation
+   
     #10k scenario 4.2Gb/s
     #10000 1450 36 3 2
     networks:
