@@ -50,7 +50,7 @@ services:
       - STATS_INTERVAL=10
       - RUST_LOG=INFO
       - BUFFER_SIZE=1450
-      - CACHE_SIZE=1800
+      - CACHE_SIZE=2000
       - WORKER_THREADS=3 #worker threads 0 --> #CPU core
       - USE_PROTO=false
       - KAFKA_BROKERS=kafka:29092
@@ -77,7 +77,7 @@ services:
     - PAYLOAD_SIZE=1450
     - USE_DTLS=false
     - CA_FILE=/ca-cert.pem
-    - RATE=20230 #19380 4.5Gb/s limit
+    - RATE=20240 #19380 4.5Gb/s limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
     - SLEEP_TASK_SPAWN=200 #ms to wait between connections creation
    
