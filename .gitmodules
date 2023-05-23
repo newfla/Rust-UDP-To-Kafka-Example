@@ -1,6 +1,6 @@
-[submodule "Rust-UDP-Traffic-Generator"]
-	path = Rust-UDP-Traffic-Generator
-	url = https://github.com/newfla/Rust-UDP-Traffic-Generator.git
-[submodule "Rust-UDP-To-Kafka-Forwarding"]
-	path = Rust-UDP-To-Kafka-Forwarding
-	url = https://github.com/newfla/Rust-UDP-To-Kafka-Forwarding.git
+[submodule "crab-net"]
+	path = crab-net
+	url = https://github.com/newfla/crab-net.git
+[submodule "crab-kafka"]
+	path = crab-kafka
+	url = https://github.com/newfla/crab-kafka.git

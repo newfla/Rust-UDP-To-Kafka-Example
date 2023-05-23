@@ -13,7 +13,8 @@ WORKDIR /cert
 RUN wget https://raw.githubusercontent.com/drogue-iot/tokio-dtls-stream-sink/main/tests/certs/ca-cert.pem
 
 FROM ubuntu:jammy
-COPY --from=builder /client/target/release/udp_traffic_generator /client
+COPY --from=builder /client/target/release/crab-net /client
 COPY --from=cert_downloader /cert /
+COPY run_client.sh .
 ENV WORKERS=2
-ENTRYPOINT ./client -d $DEST_ADDR -c $CONNECTIONS -l $PAYLOAD_SIZE -r $RATE -w $WORKERS -s $SLEEP_TASK_SPAWN --dtls $USE_DTLS --ca $CA_FILE
+ENTRYPOINT [ "./run_client.sh" ]
