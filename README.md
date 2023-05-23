@@ -1,6 +1,6 @@
 # Tokio-To-kafka
 
-Showcase example for [Rust-UDP-To-Kafka-Forwarding](https://github.com/newfla/Rust-UDP-To-Kafka-Forwarding) and [Rust-UDP-To-Kafka-Forwarding](https://github.com/newfla/Rust-UDP-Traffic-Generator) running on docker
+Showcase example for [crab-kafka](https://github.com/newfla/crab-kafka) and [crab-net](https://github.com/newfla/crab-net) running on docker
 
 # Prerequistes
 - Git
