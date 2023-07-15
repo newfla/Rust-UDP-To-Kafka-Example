@@ -5,6 +5,7 @@ RUN apt update && \
 FROM base_builder as builder
 WORKDIR /forwarder
 COPY forwarder/Cargo.toml .
+COPY forwarder/README.md .
 COPY forwarder/src src
 COPY forwarder/examples examples
 RUN cargo build -r --example udp_to_kafka
