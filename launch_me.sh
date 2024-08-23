@@ -27,9 +27,9 @@ function quit(){
 }
 
 function build() {
-    echo -e "${CYAN}CLONING SOURCE CODE${NC}"
-    git submodule init
-    git submodule update
+    #echo -e "${CYAN}CLONING SOURCE CODE${NC}"
+    #git submodule init
+    #git submodule update
     
     pushd scripts
 
