@@ -1,14 +1,14 @@
-FROM rust:latest as base_builder
+FROM rust:latest AS base_builder
 RUN apt update && \
     apt install -y curl build-essential cmake zlib1g-dev wget
 
-FROM base_builder as builder
+FROM base_builder AS builder
 WORKDIR /client
 COPY client/Cargo.toml .
 COPY client/src src
 RUN cargo build -r
 
-FROM base_builder as cert_downloader 
+FROM base_builder AS cert_downloader 
 WORKDIR /cert
 RUN wget https://raw.githubusercontent.com/drogue-iot/tokio-dtls-stream-sink/main/tests/certs/ca-cert.pem
 
