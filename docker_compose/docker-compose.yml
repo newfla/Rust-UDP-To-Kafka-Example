@@ -43,6 +43,7 @@ services:
     environment:
       - LISTEN_IP=0.0.0.0
       - LISTEN_PORT=8888
+      - USE_UDP_CONNECTED=true
       - USE_DTLS=false
       - SERVER_KEY=/server-key.pem
       - SERVER_CERT=/server-cert.pem
@@ -75,7 +76,7 @@ services:
     - PAYLOAD_SIZE=1450
     - USE_TLS=false
     - CA_FILE=/ca-cert.pem
-    - RATE=20240 #19380 4.5Gb/s limit
+    - RATE=21240 #19380 4.5Gb/s limit
     - WORKERS=3 #worker threads for the client 0 --> #CPU core
     - SLEEP_TASK_SPAWN=200 #ms to wait between connections creation
    
