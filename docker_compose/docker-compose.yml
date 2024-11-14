@@ -1,4 +1,3 @@
-version: '3'
 services:
 
   kafka:
@@ -43,8 +42,7 @@ services:
     environment:
       - LISTEN_IP=0.0.0.0
       - LISTEN_PORT=8888
-      - USE_UDP_CONNECTED=true
-      - USE_DTLS=false
+      - RECEIVER_TYPE=UDP
       - SERVER_KEY=/server-key.pem
       - SERVER_CERT=/server-cert.pem
       - STATS_INTERVAL=10
