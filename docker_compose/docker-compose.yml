@@ -1,7 +1,7 @@
 services:
 
   kafka:
-    image: docker.redpanda.com/vectorized/redpanda:v22.3.13
+    image: redpandadata/redpanda:v22.3.13
     container_name: kafka
     command:
       - redpanda

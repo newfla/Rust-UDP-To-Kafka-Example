@@ -1,6 +1,6 @@
 FROM rust:latest AS base_builder
 RUN apt update && \
-    apt install -y curl wget build-essential cmake zlib1g-dev libzstd-dev protobuf-compiler libssl-dev libssl-dev libsasl2-dev
+    apt install -y curl wget build-essential cmake zlib1g-dev libzstd-dev protobuf-compiler libssl-dev libssl-dev libsasl2-dev libclang-dev
 
 FROM base_builder AS builder
 WORKDIR /forwarder
